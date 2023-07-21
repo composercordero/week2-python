@@ -54,8 +54,8 @@ def edit_user():
         del_user()
         edit_user()
     elif what_else == 'quit':
-        print("\nThank you for updating your address book!")
-        return print_address_book()
+        print_address_book()
+        return print("\nThank you for updating your address book!")
     #Why is quit not working well?
     else:
         print("select a valid option!\n")
@@ -75,9 +75,9 @@ def del_user():
         
 def print_address_book():
     for key,value in address_book.items():
-        print(f"{key}: Address - {value['address']} / Phone - {value['phone']}")
+        return print(f"{key}: Address - {value['address']} / Phone - {value['phone']}")
         
-print(add_user())
+add_user()
 
 
 # Best Time to Meet
