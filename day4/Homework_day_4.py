@@ -3,7 +3,8 @@
 
 #     Create a function that will ask user for name and addresses and stores them in a dictionary
 #     Define an empty dictionary with which to work (global or local variable?)
-#     Begin a loop that will continue to ask a user for information until the user "quits"
+#  quit
+#    Begin a loop that will continue to ask a user for information until the user "quits"
 #     If the user does not quit, ask for a name and address and store the values into variables
 #     Add information to the dictionary with name as the key and address as the value
 #     If the user does quit, end the loop
@@ -26,58 +27,60 @@ def add_user():
         
         # Continue
         add_more = input("Add another one? y/n: ")
+        while add_more not in {'y', 'n'}:
+            add_more = input("Please enter 'y' or 'n' Add another one? y/n: ")
         
-        # Break the loop
+            # Break the loop
         if add_more == 'n':
             break
      
     # Print number of users
     if len(address_book) == 1:
-        print(f'\nYou have successfully added 1 person to the address book:\n')
+        print(f'\nYou have successfully added 1 person to the address book:')
     else:   
-        print(f'\nYou have successfully added {len(address_book)} people to the address book:\n')
+        print(f'\nYou have successfully added {len(address_book)} people to the address book: ')
 
     # Formatted list of users added
     print_address_book()
     
-    # Options to edit users
-    edit_user()
+
 
     #Do I need a return here?
         
 def edit_user():
-    what_else = input("\nadd, delete, quit: ").lower().strip()
-    
-    if what_else == 'add':
-        add_user()
-    elif what_else == 'delete':
-        del_user()
-        edit_user()
-    elif what_else == 'quit':
-        print_address_book()
-        return print("\nThank you for updating your address book!")
-    #Why is quit not working well?
-    else:
-        print("select a valid option!\n")
-        edit_user()
+    while True:
+        what_else = input("\nadd, delete, quit: ").lower().strip()
+
+        if what_else == 'add':
+            add_user()
+        elif what_else == 'delete':
+            del_user()
+        elif what_else == 'quit':
+            print_address_book()
+            return print("\nThank you for updating your address book!")
+        #Why is quit not working well?
+        else:
+            print("select a valid option!\n")
 
 def del_user():
     delete_user = input("what user would you like to delete? ").title().strip()
     if delete_user in address_book:
         del address_book[delete_user]
-        print(f'\nYou have successfully deleted {delete_user} from the address book.\n')
+        print(f'\nYou have successfully deleted {delete_user} from the address book.≈')
         print(f'This is your address_book: \n')
         print_address_book()
-        edit_user()
     else:
         print("User not in the address book.")
         del_user()
         
 def print_address_book():
     for key,value in address_book.items():
-        return print(f"{key}: Address - {value['address']} / Phone - {value['phone']}")
+        print(f"\n{key}: Address - {value['address']} / Phone - {value['phone']}")
         
 add_user()
+
+# Options to edit users
+edit_user()
 
 
 # Best Time to Meet
