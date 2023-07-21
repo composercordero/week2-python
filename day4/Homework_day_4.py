@@ -11,7 +11,7 @@
 #     Execute/Call the function
 
 
-address_book = {"Carlos": {"addres": 444, "phone": 555}}
+address_book = {}
 
 def add_user():
     while True:
@@ -54,7 +54,7 @@ def edit_user():
         del_user()
         edit_user()
     elif what_else == 'quit':
-        print("/nThank you for updating your address book!")
+        print("\nThank you for updating your address book!")
         return print_address_book()
     #Why is quit not working well?
     else:
