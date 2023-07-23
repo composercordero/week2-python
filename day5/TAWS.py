@@ -2,6 +2,7 @@ shop_name = 'That Annoying Wine Shop'
 payment = 'pending'
 shop = 'open'
 welcome = f'Welcome to {shop_name}!'
+total_cart = 0
 cart = {}
 
 articles = {
@@ -91,9 +92,10 @@ def view_cart():
         total()
         
 def total():
-    total_cart = 0
+    global total_cart
     for key, value in cart.items():
-        total_cart += cart[key]['price']*cart[key]['quantity']
+        total_cart = cart[key]['price']*cart[key]['quantity']
+    # total_cart = total_cart + new_total_cart
     print(f"\nYour total is: ${total_cart:.2f}")
     
 def find_price(add_art):
@@ -197,8 +199,8 @@ def pay():
     while True:
         method_of_payment = input('Method of payment - credit card, apple pay, or cash? ')
         if method_of_payment == 'credit card' or method_of_payment == 'apple pay':
-            return all_set()
-            
+            all_set()
+            break    
         elif method_of_payment == 'cash':
 
                 cash = input('Enter the amount of cash: ')
@@ -214,7 +216,8 @@ def all_set():
     print('You are all set. Thank you for shopping at That Annoying Wine Shop\n')
     print('Here is your Annoying Receipt:')
     view_cart()
-    shop == 'closed'
+    global shop
+    shop = 'closed'
 
 def leave():
 
@@ -230,6 +233,7 @@ def leave():
 
 def main():
     print(f'{welcome}\n')
+    
     while shop == 'open':
         action = input('What would you like to do? Add, Delete, View Cart, Pay, Leave: ').lower().strip()
 
