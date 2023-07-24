@@ -86,16 +86,17 @@ def view_cart():
     else:
         print('\n(Qty) Item - Price\n')
         for key,value in cart.items():
-            qty = cart[key].get('quantity')
-            art_price = cart[key].get('price')
+            qty = int(cart[key].get('quantity'))
+            art_price = int(cart[key].get('price'))
             print(f"({qty}) {key.title()} - ${art_price}\n\tTotal: ${art_price * qty}\n")
         total()
         
 def total():
     global total_cart
+    sum = 0
     for key, value in cart.items():
-        total_cart = cart[key]['price']*cart[key]['quantity']
-    # total_cart = total_cart + new_total_cart
+        sum += cart[key]['price'] * int(cart[key]['quantity'])
+    total_cart = sum
     print(f"\nYour total is: ${total_cart:.2f}")
     
 def find_price(add_art):
@@ -187,7 +188,7 @@ def delete():
             del cart[del_art]
             return print(f"You've deleted {del_art} from your cart")
         else:
-            cart[del_art]['quantity'] = cart[del_art]['quantity'] - int(del_art_num)
+            cart[del_art]['quantity'] = int(cart[del_art]['quantity']) - int(del_art_num)
         view_cart()
 
 
